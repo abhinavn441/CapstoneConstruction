@@ -1,0 +1,37 @@
+import { Routes } from '@angular/router';
+import { ProjectListComponent } from './features/projects/project-list/project-list.component';
+import { ProjectCreateComponent } from './features/projects/project-create/project-create.component';
+import { ProjecById } from './features/projects/project-by-id/project-byId.component';
+import { ProjectUpdateComponent } from './features/projects/project-update/project-update.component';
+import { ProjectDelete } from './features/projects/project-delete/project-delete.component';
+import { EngineerList } from './features/engineers/engineer-list/engineer-list.component';
+import { EngineerCreate } from './features/engineers/engineer-create/engineer-create';
+import { EngineerById } from './features/engineers/engineer-by-id/engineer-by-id.component';
+import { EngineerUpdate } from './features/engineers/engineer-update/engineer-update.component';
+import { EngineerService } from './core/services/engineer.service';
+import { EngineerDelete } from './features/engineers/engineer-delete/engineer-delete.component';
+import { TaskList } from './features/tasks/task-list/task-list.component';
+import { TaskById } from './features/tasks/task-by-id/task-by-id.component';
+import { TaskCreate } from './features/tasks/task-create/task-create.component';
+import { TaskDelete } from './features/tasks/task-delete/task-delete.component';
+import { TaskUpdate } from './features/tasks/task-update/task-update.component';
+import { TaskByProject } from './features/tasks/task-by-project/task-by-project.component';
+export const routes: Routes = [
+  { path: 'projects', component: ProjectListComponent },
+  { path: 'projects/create', component: ProjectCreateComponent },
+  { path: 'projects/:id', component: ProjecById },
+  { path: 'projects/update/:id', component: ProjectUpdateComponent },
+  { path: 'projects/delete/:id', component: ProjectDelete },
+  { path: 'engineers', component: EngineerList },
+  { path: 'engineers/create', component: EngineerCreate },
+  { path: 'engineers/:id', component: EngineerById },
+  { path: 'engineers/update/:id', component: EngineerUpdate },
+  { path: 'engineers/delete/:id', component: EngineerDelete },
+  { path: 'tasks', component: TaskList },
+  { path: 'tasks/:id', component: TaskById },
+  { path: 'tasks/create', component: TaskCreate },
+  { path: 'tasks/update', component: TaskUpdate },
+  { path: 'tasks/delete/:id', component: TaskDelete },
+  {path:'projects/:id/tasks', component: TaskByProject},
+  { path: '', redirectTo: '/', pathMatch: 'full' }
+];

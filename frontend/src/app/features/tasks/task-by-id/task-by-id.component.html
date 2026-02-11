@@ -1,0 +1,33 @@
+<h2>Task</h2>
+@if(loading()) {
+<div>Loading task...</div>
+}
+
+@if(!loading()) {
+<table>
+  <thead>
+    <tr>
+      <th>Task Id</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Project Id</th>
+      <th>Engineer Id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{task()?.taskId}}</td>
+      <td>{{task()?.taskName}}</td>
+      <td>{{task()?.status}}</td>
+      <td>{{task()?.projectId}}</td>
+      <td>{{task()?.engineerId}}</td>
+    </tr>
+  </tbody>
+</table>
+}
+
+@if(!loading() && !task()) {
+<div>
+  No record found.
+</div>
+}

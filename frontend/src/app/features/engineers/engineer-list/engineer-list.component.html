@@ -1,0 +1,28 @@
+<h2>Engineer List</h2>
+
+@if(loading()) {
+<div>Loading Engineers...</div>
+}
+
+@if(!loading()) {
+<table>
+    <thead>
+        <th>Engineer Id</th>
+        <th>Name</th>
+        <th>Role</th>
+    </thead>
+    <tbody>
+        @for(engineer of engineers(); track engineer.engineerId) {
+        <tr>
+            <td>{{engineer.engineerId}}</td>
+            <td>{{engineer.engineerName}}</td>
+            <td>{{engineer.engineerRole}}</td>
+        </tr>
+        }
+    </tbody>
+</table>
+}
+
+@if(!loading && engineers()?.length===0) {
+<div>No records found</div>
+}

@@ -1,0 +1,51 @@
+<h2>Update Project</h2>
+
+<form (ngSubmit)="submit()">
+
+  <label>
+    Project Name
+    <input type="text" [(ngModel)]="model.projectName" name="projectName" required />
+  </label>
+
+  <br /><br />
+
+  <label>
+    Description
+    <input type="text" [(ngModel)]="model.projectDescription" name="projectDescription" />
+  </label>
+
+  <br /><br />
+
+  <label>
+    End Date
+    <input type="date" [(ngModel)]="model.endDate" name="endDate" required />
+  </label>
+
+  <br /><br />
+
+  <label>
+    Status
+    <select [(ngModel)]="model.status" name="status">
+      <option [ngValue]="0">Planned</option>
+      <option [ngValue]="1">In Progress</option>
+      <option [ngValue]="2">On Hold</option>
+      <option [ngValue]="3">Completed</option>
+      <option [ngValue]="4">Cancelled</option>
+    </select>
+  </label>
+
+  <br /><br />
+
+  <label>
+    Actual Cost
+    <input type="number" [(ngModel)]="model.actualBudget" name="actualBudget" />
+  </label>
+
+  <br /><br />
+
+  <button type="submit" [disabled]="submitting()">
+    update
+  </button>
+
+</form>
+

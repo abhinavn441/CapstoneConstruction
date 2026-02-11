@@ -1,0 +1,42 @@
+<h2>Projects</h2>
+@if(loading()) {
+<div>Loading projects...</div>
+}
+
+@if(!loading()) {
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Manager</th>
+      <th>Budget</th>
+      <th>Actual Cost</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(project of projects(); track project.projectId) {
+    <tr>
+      <td>{{project.projectId}}</td>
+      <td>{{ project.projectName }}</td>
+      <td>{{ project.status }}</td>
+      <td>{{project.startDate | date: 'yyyy-MMM-dd'}}</td>
+      <td>{{project.endDate | date: 'yyyy-MMM-dd'}}</td>
+      <td>{{ project.managerName }}</td>
+      <td>{{ project.estimatedBudget }}</td>
+      <td>{{project.actualCost}}</td>
+    </tr>
+    }
+  </tbody>
+</table>
+}
+
+@if(!loading() && projects()?.length===0) {
+<div>
+  No projects found.
+</div>
+}

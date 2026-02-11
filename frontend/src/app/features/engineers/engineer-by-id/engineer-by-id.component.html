@@ -1,0 +1,26 @@
+<h2>Engineer</h2>
+
+@if(loading()) {
+<div>Loading Engineer...</div>
+}
+
+@if(!loading()) {
+<table>
+    <thead>
+        <th>Engineer Id</th>
+        <th>Name</th>
+        <th>Role</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{engineer()?.engineerId}}</td>
+            <td>{{engineer()?.engineerName}}</td>
+            <td>{{engineer()?.engineerRole}}</td>
+        </tr>
+    </tbody>
+</table>
+}
+
+@if(!loading && !engineer()) {
+<div>No records found</div>
+}

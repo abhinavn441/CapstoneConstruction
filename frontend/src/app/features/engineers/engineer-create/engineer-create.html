@@ -1,0 +1,17 @@
+<h2>Add Engineer</h2>
+<form (ngSubmit)="submit()">
+    <label>
+        Name
+        <input type="text" [(ngModel)]="model.engineerName" name="engineerName" required />
+    </label>
+    <br /><br />
+    <label>
+        Role
+        <input type="text" [(ngModel)]="model.engineerRole" name="engineerRole" required />
+    </label>
+
+    <br /><br />
+    <button type="submit" [disabled]="submitting()">
+        Create
+    </button>
+</form>

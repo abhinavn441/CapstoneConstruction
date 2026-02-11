@@ -1,0 +1,42 @@
+<h2>Update Project</h2>
+
+<form (ngSubmit)="submit()">
+
+    <label>
+        Task Name
+        <input type="text" [(ngModel)]="model.taskName" name="taskName" required />
+    </label>
+
+    <br /><br />
+
+    <label>
+        Description
+        <input type="text" [(ngModel)]="model.taskDescription" name="taskDescription" />
+    </label>
+
+    <br /><br />
+
+    <label>
+        Engineer ID
+        <input type="number" [(ngModel)]="model.engineerId" name="engineerId" required />
+    </label>
+
+    <br /><br />
+    <label>
+        Status
+        <select [(ngModel)]="model.status" name="status">
+            <option [ngValue]="0">Planned</option>
+            <option [ngValue]="1">In Progress</option>
+            <option [ngValue]="2">On Hold</option>
+            <option [ngValue]="3">Completed</option>
+            <option [ngValue]="4">Cancelled</option>
+        </select>
+    </label>
+
+    <br /><br />
+
+    <button type="submit" [disabled]="submitting()">
+        Update
+    </button>
+
+</form>

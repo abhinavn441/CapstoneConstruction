@@ -1,0 +1,30 @@
+<h2>Project</h2>
+
+@if (loading()) {
+<div>Loading Project</div>
+}
+
+@if (project()) {
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Manager</th>
+            <th>Budget</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ project()?.projectName }}</td>
+            <td>{{ project()?.status }}</td>
+            <td>{{ project()?.managerName }}</td>
+            <td>{{ project()?.estimatedBudget }}</td>
+        </tr>
+    </tbody>
+</table>
+}
+
+@if (!loading() && !project()) {
+<div>Project not found</div>
+}

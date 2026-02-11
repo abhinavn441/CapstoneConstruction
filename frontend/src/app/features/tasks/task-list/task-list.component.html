@@ -1,0 +1,35 @@
+<h2>Tasks</h2>
+@if(loading()) {
+<div>Loading tasks...</div>
+}
+
+@if(!loading()) {
+<table>
+  <thead>
+    <tr>
+      <th>Task Id</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Project Id</th>
+      <th>Engineer Id</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(task of tasks(); track task.taskId) {
+    <tr>
+      <td>{{task.taskId}}</td>
+      <td>{{task.taskName}}</td>
+      <td>{{task.status}}</td>
+      <td>{{task.projectId}}</td>
+      <td>{{task.engineerId}}</td>
+    </tr>
+    }
+  </tbody>
+</table>
+}
+
+@if(!loading() && tasks()?.length===0) {
+<div>
+  No tasks found.
+</div>
+}
