@@ -1,9 +1,11 @@
 ﻿using CapstoneConstruction.Dtos;
 using CapstoneConstruction.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CapstoneConstruction.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/taskitem")]
     public class TaskItemController : ControllerBase

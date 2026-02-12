@@ -3,11 +3,13 @@ using CapstoneConstruction.Dtos;
 using CapstoneConstruction.Models;
 using CapstoneConstruction.Services;
 using CapstoneConstruction.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CapstoneConstruction.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/projects")]
     public class ProjectsController : ControllerBase

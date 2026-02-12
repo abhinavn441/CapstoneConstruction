@@ -8,7 +8,6 @@ import { EngineerList } from './features/engineers/engineer-list/engineer-list.c
 import { EngineerCreate } from './features/engineers/engineer-create/engineer-create';
 import { EngineerById } from './features/engineers/engineer-by-id/engineer-by-id.component';
 import { EngineerUpdate } from './features/engineers/engineer-update/engineer-update.component';
-import { EngineerService } from './core/services/engineer.service';
 import { EngineerDelete } from './features/engineers/engineer-delete/engineer-delete.component';
 import { TaskList } from './features/tasks/task-list/task-list.component';
 import { TaskById } from './features/tasks/task-by-id/task-by-id.component';
@@ -16,6 +15,7 @@ import { TaskCreate } from './features/tasks/task-create/task-create.component';
 import { TaskDelete } from './features/tasks/task-delete/task-delete.component';
 import { TaskUpdate } from './features/tasks/task-update/task-update.component';
 import { TaskByProject } from './features/tasks/task-by-project/task-by-project.component';
+import { AuthComponent } from './core/auth/auth.component';
 export const routes: Routes = [
   { path: 'projects', component: ProjectListComponent },
   { path: 'projects/create', component: ProjectCreateComponent },
@@ -33,5 +33,6 @@ export const routes: Routes = [
   { path: 'tasks/update', component: TaskUpdate },
   { path: 'tasks/delete/:id', component: TaskDelete },
   { path: 'projects/:id/tasks', component: TaskByProject },
+  { path: '', component: AuthComponent },
   { path: '', redirectTo: '/', pathMatch: 'full' }
 ];
