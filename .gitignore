@@ -74,3 +74,4 @@ out-tsc/
 .env.local
 .env.*.local
 **/environments/environment.local.ts
+/CapstoneConstruction/appsettings.json
