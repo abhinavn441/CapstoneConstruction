@@ -3,35 +3,20 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Task } from "../models/task.model";
 import { CreateTask } from "../models/createtask.model";
+import { BaseApiService } from "./baseapi.service";
+import { UpdateTask } from "../models/updatetask.model";
 
 @Injectable({
     providedIn: 'root'
 })
-export class TaskService {
+export class TaskService extends BaseApiService<Task, CreateTask, UpdateTask> {
     private readonly apiUrl = '/api/taskitem';
 
-    constructor(private http: HttpClient) { }
-
-    getAll(): Observable<Task[]> {
-        return this.http.get<Task[]>(this.apiUrl);
+    constructor(http: HttpClient) {
+        super(http, '/api/taskitem')
     }
-
-    getById(id: number): Observable<Task> {
-        return this.http.get<Task>(`${this.apiUrl}/${id}`);
-    }
-
-    create(payload: CreateTask): Observable<void> {
-        return this.http.post<void>(this.apiUrl, payload);
-    }
-
-    update(id: number, payload: any): Observable<void> {
-        return this.http.put<void>(`${this.apiUrl}/${id}`, payload);
-    }
-
-    delete(id: number): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}/${id}`);
-    }
-    getByProject(id: number) : Observable<Task[]> {
+    
+    getByProject(id: number): Observable<Task[]> {
         return this.http.get<Task[]>(`api/projects/${id}/tasks`);
     }
 }

@@ -28,10 +28,10 @@ export const routes: Routes = [
   { path: 'engineers/update/:id', component: EngineerUpdate },
   { path: 'engineers/delete/:id', component: EngineerDelete },
   { path: 'tasks', component: TaskList },
-  { path: 'tasks/:id', component: TaskById },
   { path: 'tasks/create', component: TaskCreate },
+  { path: 'tasks/:id', component: TaskById },
   { path: 'tasks/update', component: TaskUpdate },
   { path: 'tasks/delete/:id', component: TaskDelete },
-  {path:'projects/:id/tasks', component: TaskByProject},
+  { path: 'projects/:id/tasks', component: TaskByProject },
   { path: '', redirectTo: '/', pathMatch: 'full' }
 ];
