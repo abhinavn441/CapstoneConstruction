@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavigationService } from '../../../core/services/nagivation.service';
 
 @Component({
   selector: 'app-task-create',
@@ -20,18 +21,23 @@ export class TaskCreate {
     projectId: 0,
     engineerId: 0
   };
-  private taskservice=inject(TaskService);
-  private router=inject(Router);
-  submitting=signal(false);
 
-  submit() : void {
+  constructor(
+    private taskservice:TaskService,
+    private navigation: NavigationService
+  ) { }
+
+  private router = inject(Router);
+  submitting = signal(false);
+
+  submit(): void {
     this.submitting.set(true);
 
     this.taskservice.create(this.model).pipe(
       finalize(() => this.submitting.set(false))
     ).subscribe({
       next: () => {
-        this.router.navigate(['/tasks']);
+        this.navigation.navigateToTasks();
       }
     });
     console.log(this.model);

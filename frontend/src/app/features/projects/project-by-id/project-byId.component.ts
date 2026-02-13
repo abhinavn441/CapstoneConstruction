@@ -12,7 +12,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './project-byId.component.html',
 })
 export class ProjecById {
-  private projectService = inject(ProjectService);
+  constructor(
+    private projectService: ProjectService
+  ) { }
+  
   private route = inject(ActivatedRoute)
   loading = signal(true);
 
@@ -22,8 +25,8 @@ export class ProjecById {
       switchMap(params => {
         const id = Number(params.get('id'));
         return this.projectService.getById(id).pipe(
-            finalize(() => this.loading.set(false)),
-            catchError(() => of(null))
+          finalize(() => this.loading.set(false)),
+          catchError(() => of(null))
         );
       })
     ),

@@ -12,7 +12,10 @@ import { catchError, finalize, of, switchMap } from 'rxjs';
   styleUrl: './engineer-by-id.component.css',
 })
 export class EngineerById {
-  private engineerService = inject(EngineerService);
+  constructor(
+    private engineerService : EngineerService
+  ) {}
+  
   private route = inject(ActivatedRoute);
   loading = signal(true);
 

@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { finalize, switchMap } from 'rxjs';
 import { UpdateProject } from '../../../core/models/updateprojet.model';
 import { FormsModule } from '@angular/forms';
+import { NavigationService } from '../../../core/services/nagivation.service';
 
 @Component({
   selector: 'app-project-update',
@@ -23,18 +24,20 @@ export class ProjectUpdateComponent {
   };
   submitting = signal(false);
 
-  private projectService = inject(ProjectService);
-  private router= inject(Router);
-  private route = inject(ActivatedRoute);
+  constructor(
+    private projectService : ProjectService,
+    private route : ActivatedRoute,
+    private navigation: NavigationService
+  ) { }
 
   submit(): void {
     this.submitting.set(true);
     this.route.paramMap.pipe(
       switchMap(params => this.projectService.update(Number(params.get('id')), this.model)),
-    finalize(() => this.submitting.set(false))
-    ).subscribe( {
+      finalize(() => this.submitting.set(false))
+    ).subscribe({
       next: () => {
-        this.router.navigate(['/projects']);
+        this.navigation.navigateToProjects();
       }
     });
   }

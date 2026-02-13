@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { EngineerService } from '../../../core/services/engineer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { NavigationService } from '../../../core/services/nagivation.service';
 
 @Component({
   selector: 'app-engineer-delete.component',
@@ -10,16 +11,19 @@ import { switchMap } from 'rxjs';
   styleUrl: './engineer-delete.component.css',
 })
 export class EngineerDelete {
-  private engineerService = inject(EngineerService);
+  constructor(
+    private engineerService:EngineerService,
+    private navigation: NavigationService
+  ) {}
+  
   private route=inject(ActivatedRoute);
-  private router=inject(Router);
-
+  
   remove() : void {
     this.route.paramMap.pipe(
       switchMap(params => this.engineerService.delete(Number(params.get('id'))))
     ).subscribe({
       next: () => {
-        this.router.navigate(['/engineers']);
+        this.navigation.navigateToEngineers();
       }
     });
   }

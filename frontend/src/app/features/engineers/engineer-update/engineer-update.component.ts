@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavigationService } from '../../../core/services/nagivation.service';
 
 @Component({
   selector: 'app-engineer-update',
@@ -19,8 +20,11 @@ export class EngineerUpdate {
   };
   submitting = signal(false);
 
-  private engineerService = inject(EngineerService);
-  private router=inject(Router);
+  constructor(  
+    private engineerService:EngineerService,
+    private navigation: NavigationService
+  ) {}
+
   private route=inject(ActivatedRoute);
 
   submit() : void {
@@ -30,7 +34,7 @@ export class EngineerUpdate {
         finalize(() => this.submitting.set(false))
       ).subscribe({
         next: () => {
-          this.router.navigate(['/engineers']);
+          this.navigation.navigateToEngineers();
         }
       });
   }

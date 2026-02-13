@@ -12,7 +12,11 @@ import { catchError, finalize, of, switchMap } from 'rxjs';
   styleUrl: './task-by-project.component.css',
 })
 export class TaskByProject {
-private taskService = inject(TaskService);
+  constructor(
+    private taskService: TaskService
+  ) { }
+
+
   private route = inject(ActivatedRoute);
   loading = signal(true);
 

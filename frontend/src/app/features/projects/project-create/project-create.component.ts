@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ProjectService } from '../../../core/services/project.service';
 import { CreateProject } from '../../../core/models/createproject.model';
 import { finalize } from 'rxjs';
+import { NavigationService } from '../../../core/services/nagivation.service';
 @Component({
   selector: 'app-project-create',
   standalone: true,
@@ -26,7 +27,7 @@ export class ProjectCreateComponent {
 
   constructor(
     private projectService: ProjectService,
-    private router: Router
+    private navigation: NavigationService
   ) { }
 
   submit(): void {
@@ -36,7 +37,7 @@ export class ProjectCreateComponent {
       finalize(() => this.submitting.set(false))
     ).subscribe({
       next: () => {
-        this.router.navigate(['/projects']);
+        this.navigation.navigateToProjects();
       }
     });
     console.log(this.model);

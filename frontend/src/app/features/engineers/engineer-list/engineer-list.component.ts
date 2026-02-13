@@ -11,6 +11,7 @@ import { catchError, finalize, of } from 'rxjs';
   styleUrl: './engineer-list.component.css',
 })
 export class EngineerList {
+  constructor() {}
   private engineerService=inject(EngineerService);
   loading=signal(true);
   

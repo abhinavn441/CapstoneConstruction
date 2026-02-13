@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { TaskService } from '../../../core/services/task.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, switchMap } from 'rxjs';
+import { NavigationService } from '../../../core/services/nagivation.service';
 
 @Component({
   selector: 'app-task-delete',
@@ -10,16 +11,19 @@ import { finalize, switchMap } from 'rxjs';
   styleUrl: './task-delete.component.css',
 })
 export class TaskDelete {
-  private taskService=inject(TaskService);
-  private router=inject(Router);
-  private route=inject(ActivatedRoute);
+  constructor(
+    private taskService:TaskService,
+    private navigation: NavigationService
+  ) { }
+
+  private route = inject(ActivatedRoute);
 
   remove(): void {
     this.route.paramMap.pipe(
       switchMap(params => this.taskService.delete(Number(params.get('id'))))
     ).subscribe({
       next: () => {
-        this.router.navigate(['/tasks']);
+        this.navigation.navigateToTasks();
       }
     });
   }

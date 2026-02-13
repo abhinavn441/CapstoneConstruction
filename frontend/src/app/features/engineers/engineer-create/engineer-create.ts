@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavigationService } from '../../../core/services/nagivation.service';
 
 @Component({
   selector: 'app-engineer-create',
@@ -18,8 +19,11 @@ export class EngineerCreate {
     engineerRole: ''
   };
   submitting = signal(false);
-  private engineerService = inject(EngineerService);
-  private router = inject(Router);
+  constructor(
+    private engineerService: EngineerService,
+    private navigation: NavigationService
+  ) { }
+
 
   submit(): void {
     this.submitting.set(true);
@@ -27,7 +31,7 @@ export class EngineerCreate {
       finalize(() => this.submitting.set(false))
     ).subscribe({
       next: () => {
-        this.router.navigate(['/engineers']);
+        this.navigation.navigateToEngineers();
       }
     });
   }

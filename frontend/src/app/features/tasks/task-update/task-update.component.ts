@@ -6,6 +6,7 @@ import { TaskService } from '../../../core/services/task.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from '../../../core/models/task.model';
 import { finalize, switchMap } from 'rxjs';
+import { NavigationService } from '../../../core/services/nagivation.service';
 
 @Component({
   selector: 'app-task-update',
@@ -20,8 +21,11 @@ export class TaskUpdate {
     status: 0,
     engineerId: 0
   };
-  private taskService = inject(TaskService);
-  private router = inject(Router);
+  constructor(
+    private taskService: TaskService,
+    private navigation: NavigationService
+  ) { }
+
   private route = inject(ActivatedRoute);
   submitting = signal(false);
   submit(): void {
@@ -31,7 +35,7 @@ export class TaskUpdate {
       finalize(() => this.submitting.set(false))
     ).subscribe({
       next: () => {
-        this.router.navigate(['/tasks']);
+        this.navigation.navigateToTasks();
       }
     });
   }
