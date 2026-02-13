@@ -3,6 +3,7 @@ import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { finalize } from 'rxjs';
+import { NavigationService } from '../services/nagivation.service';
 
 @Component({
   selector: 'app-auth.component',
@@ -13,7 +14,7 @@ import { finalize } from 'rxjs';
 export class AuthComponent {
   constructor(
     private authService: AuthService,
-    private router: Router
+    private navigation: NavigationService
   ) { }
   logging = signal(false);
   username = '';
@@ -26,7 +27,7 @@ export class AuthComponent {
     ).subscribe({
       next: res => {
         this.authService.saveToken(res.token);
-        this.router.navigate(['/projects']);
+        this.navigation.navigateToProjects();
       },
       error: () => alert('Invalid credentials')
     });
