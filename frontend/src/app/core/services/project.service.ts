@@ -8,9 +8,7 @@ import { BaseApiService } from './baseapi.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService extends BaseApiService<Project, CreateProject, UpdateProject>{
-
-  private readonly apiUrl = '/api/projects';
+export class ProjectService extends BaseApiService<Project, CreateProject, UpdateProject> {
 
   constructor(http: HttpClient) {
     super(http, '/api/projects');

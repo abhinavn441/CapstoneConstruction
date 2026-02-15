@@ -9,9 +9,8 @@ import { BaseApiService } from "./baseapi.service";
     providedIn: 'root'
 })
 export class EngineerService extends BaseApiService<Engineer, CreateEngineer, UpdateEngineer> {
-    private readonly apiUrl = '/api/engineers';
-
-    constructor (http: HttpClient) {
+    
+    constructor(http: HttpClient) {
         super(http, '/api/engineers');
     }
 }

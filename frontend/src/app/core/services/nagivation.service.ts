@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Inagivation } from "./interfaces/inagivation";
+import { INavigation } from "./interfaces/inagivation";
 import { Router } from "@angular/router";
 
-@Injectable ( {
+@Injectable({
     providedIn: 'root'
 })
-
-export class NavigationService implements Inagivation {
+export class NavigationService implements INavigation {
     constructor(
         private router:Router
     ) {}

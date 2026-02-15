@@ -1,4 +1,4 @@
-export interface Inagivation {
+export interface INavigation {
     navigateToProjects(): void;
     navigateToTasks(): void;
     navigateToEngineers(): void;

@@ -10,10 +10,9 @@ import { UpdateTask } from "../models/updatetask.model";
     providedIn: 'root'
 })
 export class TaskService extends BaseApiService<Task, CreateTask, UpdateTask> {
-    private readonly apiUrl = '/api/taskitem';
 
     constructor(http: HttpClient) {
-        super(http, '/api/taskitem')
+        super(http, '/api/taskitem');
     }
     
     getByProject(id: number): Observable<Task[]> {
