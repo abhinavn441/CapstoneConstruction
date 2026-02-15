@@ -12,16 +12,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './project-byId.component.html',
 })
 export class ProjecById {
-  constructor(
-    private projectService: ProjectService
-  ) { }
+  private projectService = inject(ProjectService);
+  private route = inject(ActivatedRoute);
   
-  private route = inject(ActivatedRoute)
   loading = signal(true);
 
   project = toSignal<Project | null>(
     this.route.paramMap.pipe(
-
       switchMap(params => {
         const id = Number(params.get('id'));
         return this.projectService.getById(id).pipe(

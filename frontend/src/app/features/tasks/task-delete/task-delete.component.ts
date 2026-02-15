@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { TaskService } from '../../../core/services/task.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { finalize, switchMap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { NavigationService } from '../../../core/services/nagivation.service';
 
 @Component({
@@ -12,11 +12,10 @@ import { NavigationService } from '../../../core/services/nagivation.service';
 })
 export class TaskDelete {
   constructor(
-    private taskService:TaskService,
-    private navigation: NavigationService
-  ) { }
-
-  private route = inject(ActivatedRoute);
+    private taskService: TaskService,
+    private navigation: NavigationService,
+    private route: ActivatedRoute
+  ) {}
 
   remove(): void {
     this.route.paramMap.pipe(

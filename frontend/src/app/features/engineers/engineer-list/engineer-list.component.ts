@@ -11,11 +11,11 @@ import { catchError, finalize, of } from 'rxjs';
   styleUrl: './engineer-list.component.css',
 })
 export class EngineerList {
-  constructor() {}
-  private engineerService=inject(EngineerService);
-  loading=signal(true);
+  private engineerService = inject(EngineerService);
   
-  engineers=toSignal<Engineer[]>(
+  loading = signal(true);
+  
+  engineers = toSignal<Engineer[]>(
     this.engineerService.getAll().pipe(
       finalize(() => this.loading.set(false)),
       catchError(() => of([]))

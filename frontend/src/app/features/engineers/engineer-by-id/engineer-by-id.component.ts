@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Engineer } from '../../../core/models/engineer.model';
 import { catchError, finalize, of, switchMap } from 'rxjs';
+
 @Component({
   selector: 'app-engineer-by-id',
   imports: [CommonModule],
@@ -12,11 +13,9 @@ import { catchError, finalize, of, switchMap } from 'rxjs';
   styleUrl: './engineer-by-id.component.css',
 })
 export class EngineerById {
-  constructor(
-    private engineerService : EngineerService
-  ) {}
-  
+  private engineerService = inject(EngineerService);
   private route = inject(ActivatedRoute);
+  
   loading = signal(true);
 
   engineer = toSignal<Engineer | null>(
@@ -30,5 +29,5 @@ export class EngineerById {
       })
     ),
     { initialValue: null }
-  )
+  );
 }

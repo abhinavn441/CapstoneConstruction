@@ -1,30 +1,35 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { TokenStorageService } from "../../services/token-storage.service";
 
 @Injectable({
     providedIn: 'root'
 })
-
 export class AuthService {
-    private readonly apiUrl='/api/auth';
+    private readonly apiUrl = '/api/auth';
 
-    constructor (
-        private http: HttpClient
+    constructor(
+        private http: HttpClient,
+        private tokenStorage: TokenStorageService
     ) {}
+
     login(username: string, password: string) {
         return this.http.post<{token: string}>(
             `${this.apiUrl}/login`,
             {username, password}
         );
     }
-    saveToken(token:string) {
-        return localStorage.setItem('token', token);
+
+    saveToken(token: string): void {
+        this.tokenStorage.saveToken(token);
     }
-    getToken() : string | null {
-        return localStorage.getItem('token');
+
+    getToken(): string | null {
+        return this.tokenStorage.getToken();
     }
-    logout() {
-        localStorage.removeItem('token');
+
+    logout(): void {
+        this.tokenStorage.removeToken();
     }
 
     isAuthenticated(): boolean {

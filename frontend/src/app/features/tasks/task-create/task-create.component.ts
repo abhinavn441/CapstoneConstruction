@@ -1,7 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CreateTask } from '../../../core/models/createtask.model';
 import { TaskService } from '../../../core/services/task.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,14 +20,12 @@ export class TaskCreate {
     projectId: 0,
     engineerId: 0
   };
+  submitting = signal(false);
 
   constructor(
-    private taskservice:TaskService,
+    private taskservice: TaskService,
     private navigation: NavigationService
-  ) { }
-
-  private router = inject(Router);
-  submitting = signal(false);
+  ) {}
 
   submit(): void {
     this.submitting.set(true);

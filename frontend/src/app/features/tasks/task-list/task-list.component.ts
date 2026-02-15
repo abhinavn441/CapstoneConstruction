@@ -11,10 +11,11 @@ import { catchError, finalize, of } from 'rxjs';
   styleUrl: './task-list.component.css',
 })
 export class TaskList {
-  private taskService=inject(TaskService);
-  loading=signal(true);
+  private taskService = inject(TaskService);
   
-  tasks=toSignal<Task[]>(
+  loading = signal(true);
+  
+  tasks = toSignal<Task[]>(
     this.taskService.getAll().pipe(
       finalize(() => this.loading.set(false)),
       catchError(() => of([]))

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { finalize } from 'rxjs';
 import { NavigationService } from '../services/nagivation.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-auth.component',
@@ -12,13 +13,15 @@ import { NavigationService } from '../services/nagivation.service';
   styleUrl: './auth.component.css',
 })
 export class AuthComponent {
-  constructor(
-    private authService: AuthService,
-    private navigation: NavigationService
-  ) { }
   logging = signal(false);
   username = '';
   password = '';
+
+  constructor(
+    private authService: AuthService,
+    private navigation: NavigationService,
+    private notification: NotificationService
+  ) {}
 
   onLogin(): void {
     this.logging.set(true);
@@ -29,8 +32,7 @@ export class AuthComponent {
         this.authService.saveToken(res.token);
         this.navigation.navigateToProjects();
       },
-      error: () => alert('Invalid credentials')
+      error: () => this.notification.showError('Invalid credentials')
     });
   }
-
 }

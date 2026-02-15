@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { EngineerService } from '../../../core/services/engineer.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { NavigationService } from '../../../core/services/nagivation.service';
 
@@ -12,13 +12,12 @@ import { NavigationService } from '../../../core/services/nagivation.service';
 })
 export class EngineerDelete {
   constructor(
-    private engineerService:EngineerService,
-    private navigation: NavigationService
+    private engineerService: EngineerService,
+    private navigation: NavigationService,
+    private route: ActivatedRoute
   ) {}
   
-  private route=inject(ActivatedRoute);
-  
-  remove() : void {
+  remove(): void {
     this.route.paramMap.pipe(
       switchMap(params => this.engineerService.delete(Number(params.get('id'))))
     ).subscribe({

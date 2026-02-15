@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UpdateTask } from '../../../core/models/updatetask.model';
 import { TaskService } from '../../../core/services/task.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Task } from '../../../core/models/task.model';
+import { ActivatedRoute } from '@angular/router';
 import { finalize, switchMap } from 'rxjs';
 import { NavigationService } from '../../../core/services/nagivation.service';
 
@@ -21,13 +20,14 @@ export class TaskUpdate {
     status: 0,
     engineerId: 0
   };
+  submitting = signal(false);
+
   constructor(
     private taskService: TaskService,
-    private navigation: NavigationService
-  ) { }
+    private navigation: NavigationService,
+    private route: ActivatedRoute
+  ) {}
 
-  private route = inject(ActivatedRoute);
-  submitting = signal(false);
   submit(): void {
     this.submitting.set(true);
     this.route.paramMap.pipe(

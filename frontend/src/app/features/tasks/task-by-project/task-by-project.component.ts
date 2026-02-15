@@ -12,12 +12,9 @@ import { catchError, finalize, of, switchMap } from 'rxjs';
   styleUrl: './task-by-project.component.css',
 })
 export class TaskByProject {
-  constructor(
-    private taskService: TaskService
-  ) { }
-
-
+  private taskService = inject(TaskService);
   private route = inject(ActivatedRoute);
+  
   loading = signal(true);
 
   tasks = toSignal<Task[] | null>(
@@ -31,6 +28,6 @@ export class TaskByProject {
       })
     ),
     { initialValue: null }
-  )
+  );
 }
 

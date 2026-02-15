@@ -1,7 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { UpdateEngineer } from '../../../core/models/updateengineer.model';
 import { EngineerService } from '../../../core/services/engineer.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { finalize, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -20,22 +20,21 @@ export class EngineerUpdate {
   };
   submitting = signal(false);
 
-  constructor(  
-    private engineerService:EngineerService,
-    private navigation: NavigationService
+  constructor(
+    private engineerService: EngineerService,
+    private navigation: NavigationService,
+    private route: ActivatedRoute
   ) {}
 
-  private route=inject(ActivatedRoute);
-
-  submit() : void {
+  submit(): void {
     this.submitting.set(true);
     this.route.paramMap.pipe(
       switchMap(params => this.engineerService.update(Number(params.get('id')), this.model)),
-        finalize(() => this.submitting.set(false))
-      ).subscribe({
-        next: () => {
-          this.navigation.navigateToEngineers();
-        }
-      });
+      finalize(() => this.submitting.set(false))
+    ).subscribe({
+      next: () => {
+        this.navigation.navigateToEngineers();
+      }
+    });
   }
 }

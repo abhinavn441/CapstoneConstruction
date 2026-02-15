@@ -1,7 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CreateEngineer } from '../../../core/models/createengineer.model';
 import { EngineerService } from '../../../core/services/engineer.service';
-import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -19,11 +18,11 @@ export class EngineerCreate {
     engineerRole: ''
   };
   submitting = signal(false);
+
   constructor(
     private engineerService: EngineerService,
     private navigation: NavigationService
-  ) { }
-
+  ) {}
 
   submit(): void {
     this.submitting.set(true);

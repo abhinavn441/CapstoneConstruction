@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 })
 export class ProjectListComponent {
   private projectService = inject(ProjectService);
+  
   loading = signal(true);
 
   projects = toSignal<Project[]>(
