@@ -16,23 +16,26 @@ import { TaskDelete } from './features/tasks/task-delete/task-delete.component';
 import { TaskUpdate } from './features/tasks/task-update/task-update.component';
 import { TaskByProject } from './features/tasks/task-by-project/task-by-project.component';
 import { AuthComponent } from './core/auth/auth.component';
+import { MenuComponent } from './features/menu/menu.component';
+import { loginGuard } from './core/auth/guards/login-guard';
 export const routes: Routes = [
-  { path: 'projects', component: ProjectListComponent },
-  { path: 'projects/create', component: ProjectCreateComponent },
-  { path: 'projects/:id', component: ProjecById },
-  { path: 'projects/update/:id', component: ProjectUpdateComponent },
-  { path: 'projects/delete/:id', component: ProjectDelete },
-  { path: 'engineers', component: EngineerList },
-  { path: 'engineers/create', component: EngineerCreate },
-  { path: 'engineers/:id', component: EngineerById },
-  { path: 'engineers/update/:id', component: EngineerUpdate },
-  { path: 'engineers/delete/:id', component: EngineerDelete },
-  { path: 'tasks', component: TaskList },
-  { path: 'tasks/create', component: TaskCreate },
-  { path: 'tasks/:id', component: TaskById },
-  { path: 'tasks/update', component: TaskUpdate },
-  { path: 'tasks/delete/:id', component: TaskDelete },
-  { path: 'projects/:id/tasks', component: TaskByProject },
-  { path: '', component: AuthComponent },
+  { path: 'projects', component: ProjectListComponent, canActivate: [loginGuard] },
+  { path: 'projects/create', component: ProjectCreateComponent, canActivate: [loginGuard] },
+  { path: 'projects/:id', component: ProjecById, canActivate: [loginGuard] },
+  { path: 'projects/update/:id', component: ProjectUpdateComponent, canActivate: [loginGuard] },
+  { path: 'projects/delete/:id', component: ProjectDelete, canActivate: [loginGuard] },
+  { path: 'engineers', component: EngineerList, canActivate: [loginGuard] },
+  { path: 'engineers/create', component: EngineerCreate, canActivate: [loginGuard] },
+  { path: 'engineers/:id', component: EngineerById, canActivate: [loginGuard] },
+  { path: 'engineers/update/:id', component: EngineerUpdate, canActivate: [loginGuard] },
+  { path: 'engineers/delete/:id', component: EngineerDelete, canActivate: [loginGuard] },
+  { path: 'tasks', component: TaskList, canActivate: [loginGuard] },
+  { path: 'tasks/create', component: TaskCreate, canActivate: [loginGuard] },
+  { path: 'tasks/:id', component: TaskById, canActivate: [loginGuard] },
+  { path: 'tasks/update', component: TaskUpdate, canActivate: [loginGuard] },
+  { path: 'tasks/delete/:id', component: TaskDelete, canActivate: [loginGuard] },
+  { path: 'projects/:id/tasks', component: TaskByProject, canActivate: [loginGuard] },
+  { path: '', component: AuthComponent},
+  { path: 'menu', component: MenuComponent, canActivate: [loginGuard] },
   { path: '', redirectTo: '/', pathMatch: 'full' }
 ];

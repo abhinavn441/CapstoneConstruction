@@ -22,4 +22,8 @@ export class NavigationService implements INavigation {
     navigateToLogin() {
         this.router.navigate(['/']);
     }
+
+    navigateToMenu() {
+        this.router.navigate(['/menu']);
+    }
 }

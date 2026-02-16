@@ -30,7 +30,7 @@ export class AuthComponent {
     ).subscribe({
       next: res => {
         this.authService.saveToken(res.token);
-        this.navigation.navigateToProjects();
+        this.navigation.navigateToMenu();
       },
       error: () => this.notification.showError('Invalid credentials')
     });

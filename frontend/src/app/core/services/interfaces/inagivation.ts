@@ -3,4 +3,5 @@ export interface INavigation {
     navigateToTasks(): void;
     navigateToEngineers(): void;
     navigateToLogin(): void;
+    navigateToMenu(): void;
 }

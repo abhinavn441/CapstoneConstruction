@@ -22,4 +22,5 @@ export class ProjectListComponent {
       catchError(() => of([]))
     )
   );
+  
 }
