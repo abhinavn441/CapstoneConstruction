@@ -21,7 +21,9 @@ export class AuthComponent {
     private authService: AuthService,
     private navigation: NavigationService,
     private notification: NotificationService
-  ) {}
+  ) {
+    this.authService.logout();
+  }
 
   onLogin(): void {
     this.logging.set(true);

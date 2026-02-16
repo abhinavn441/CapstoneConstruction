@@ -12,9 +12,11 @@ export class NavigationService implements INavigation {
 
     navigateToProjects() {
         this.router.navigate(['/projects']);
+        console.log(this.router.url);
     }
     navigateToTasks() {
         this.router.navigate(['/tasks']);
+        console.log(this.router.url);
     }
     navigateToEngineers() {
         this.router.navigate(['/engineers']);

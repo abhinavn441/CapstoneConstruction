@@ -5,6 +5,7 @@ import { finalize } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavigationService } from '../../../core/services/nagivation.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-task-create',
@@ -24,16 +25,21 @@ export class TaskCreate {
 
   constructor(
     private taskservice: TaskService,
-    private navigation: NavigationService
+    private navigation: NavigationService,
+    private snackbar: MatSnackBar
   ) {}
 
   submit(): void {
     this.submitting.set(true);
 
     this.taskservice.create(this.model).pipe(
-      finalize(() => this.submitting.set(false))
+      finalize(() => this.submitting.set(false)),
+      
     ).subscribe({
       next: () => {
+        this.snackbar.open('Task created', 'Dismiss', {
+          duration: 2000
+        });
         this.navigation.navigateToTasks();
       }
     });

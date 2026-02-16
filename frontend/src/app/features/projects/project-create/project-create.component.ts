@@ -6,6 +6,7 @@ import { ProjectService } from '../../../core/services/project.service';
 import { CreateProject } from '../../../core/models/createproject.model';
 import { finalize } from 'rxjs';
 import { NavigationService } from '../../../core/services/nagivation.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-project-create',
   standalone: true,
@@ -27,7 +28,8 @@ export class ProjectCreateComponent {
 
   constructor(
     private projectService: ProjectService,
-    private navigation: NavigationService
+    private navigation: NavigationService,
+    private snackbar: MatSnackBar
   ) { }
 
   submit(): void {
@@ -37,6 +39,9 @@ export class ProjectCreateComponent {
       finalize(() => this.submitting.set(false))
     ).subscribe({
       next: () => {
+        this.snackbar.open('Project created', 'Dismiss', {
+          duration: 2000
+        });
         this.navigation.navigateToProjects();
       }
     });

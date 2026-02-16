@@ -5,7 +5,7 @@ import { ProjecById } from './features/projects/project-by-id/project-byId.compo
 import { ProjectUpdateComponent } from './features/projects/project-update/project-update.component';
 import { ProjectDelete } from './features/projects/project-delete/project-delete.component';
 import { EngineerList } from './features/engineers/engineer-list/engineer-list.component';
-import { EngineerCreate } from './features/engineers/engineer-create/engineer-create';
+import { EngineerCreate } from './features/engineers/engineer-create/engineer-create.component';
 import { EngineerById } from './features/engineers/engineer-by-id/engineer-by-id.component';
 import { EngineerUpdate } from './features/engineers/engineer-update/engineer-update.component';
 import { EngineerDelete } from './features/engineers/engineer-delete/engineer-delete.component';
@@ -18,6 +18,7 @@ import { TaskByProject } from './features/tasks/task-by-project/task-by-project.
 import { AuthComponent } from './core/auth/auth.component';
 import { MenuComponent } from './features/menu/menu.component';
 import { loginGuard } from './core/auth/guards/login-guard';
+import { unsavedComponentGuard } from './core/auth/guards/unsaved.component-guard';
 export const routes: Routes = [
   { path: 'projects', component: ProjectListComponent, canActivate: [loginGuard] },
   { path: 'projects/create', component: ProjectCreateComponent, canActivate: [loginGuard] },
@@ -25,7 +26,7 @@ export const routes: Routes = [
   { path: 'projects/update/:id', component: ProjectUpdateComponent, canActivate: [loginGuard] },
   { path: 'projects/delete/:id', component: ProjectDelete, canActivate: [loginGuard] },
   { path: 'engineers', component: EngineerList, canActivate: [loginGuard] },
-  { path: 'engineers/create', component: EngineerCreate, canActivate: [loginGuard] },
+  { path: 'engineers/create', component: EngineerCreate, canActivate: [loginGuard], canDeactivate: [unsavedComponentGuard] },
   { path: 'engineers/:id', component: EngineerById, canActivate: [loginGuard] },
   { path: 'engineers/update/:id', component: EngineerUpdate, canActivate: [loginGuard] },
   { path: 'engineers/delete/:id', component: EngineerDelete, canActivate: [loginGuard] },
