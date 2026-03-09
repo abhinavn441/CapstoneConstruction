@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { INotification } from "./interfaces/notification.interface";
+import notify from 'devextreme/ui/notify';
 
 @Injectable({
     providedIn: 'root'
@@ -7,17 +8,14 @@ import { INotification } from "./interfaces/notification.interface";
 export class NotificationService implements INotification {
     
     showSuccess(message: string): void {
-        alert(`Success: ${message}`);
-        // TODO: Replace with proper toast/notification library
+        notify(`Success: ${message}`);
     }
 
     showError(message: string): void {
-        alert(`Error: ${message}`);
-        // TODO: Replace with proper toast/notification library
+        notify(`Error: ${message}`);
     }
 
     showInfo(message: string): void {
-        alert(message);
-        // TODO: Replace with proper toast/notification library
+        notify(message);
     }
 }

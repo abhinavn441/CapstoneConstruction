@@ -3,5 +3,5 @@ export interface UpdateProject {
   projectDescription: string;
   endDate: string;
   status: number;
-  actualBudget: number;
+  actualCost: number;
 }

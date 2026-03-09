@@ -5,26 +5,34 @@
 }
 
 @if (project()) {
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Manager</th>
-            <th>Budget</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{ project()?.projectName }}</td>
-            <td>{{ project()?.status }}</td>
-            <td>{{ project()?.managerName }}</td>
-            <td>{{ project()?.estimatedBudget }}</td>
-        </tr>
-    </tbody>
-</table>
+<dx-data-grid [dataSource]="[project()]" [showBorders]="true" [columnAutoWidth]="true" [rowAlternationEnabled]="true"
+  [hoverStateEnabled]="true" [keyExpr]="'projectId'">
+
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]" [showInfo]="true">
+  </dxo-pager>
+
+  <dxi-column dataField="projectId" caption="Id" [width]="80"></dxi-column>
+  <dxi-column dataField="projectName" caption="Name"></dxi-column>
+  <dxi-column dataField="status" caption="Status"></dxi-column>
+  <dxi-column dataField="startDate" caption="Start Date" dataType="date" format="yyyy-MMM-dd"></dxi-column>
+  <dxi-column dataField="endDate" caption="End Date" dataType="date" format="yyyy-MMM-dd"></dxi-column>
+  <dxi-column dataField="managerName" caption="Manager"></dxi-column>
+  <dxi-column dataField="estimatedBudget" caption="Budget" dataType="number" format="currency"></dxi-column>
+  <dxi-column dataField="actualCost" caption="Actual Cost" dataType="number" format="currency"></dxi-column>
+</dx-data-grid>
 }
 
 @if (!loading() && !project()) {
 <div>Project not found</div>
 }
+<div class="buttons">
+
+  <div>
+    <dx-button stylingMode="contained" text="Back to Projects" type="default" [width]="120" (onClick)="toProject()">
+    </dx-button>
+  </div>
+  <dx-button stylingMode="contained" text="Delete" type="danger" [width]="120" (onClick)="deleteProject()"
+    [disabled]="!project()">
+  </dx-button>
+</div>

@@ -33,7 +33,7 @@ export const routes: Routes = [
   { path: 'tasks', component: TaskList, canActivate: [loginGuard] },
   { path: 'tasks/create', component: TaskCreate, canActivate: [loginGuard] },
   { path: 'tasks/:id', component: TaskById, canActivate: [loginGuard] },
-  { path: 'tasks/update', component: TaskUpdate, canActivate: [loginGuard] },
+  { path: 'tasks/update/:id', component: TaskUpdate, canActivate: [loginGuard] },
   { path: 'tasks/delete/:id', component: TaskDelete, canActivate: [loginGuard] },
   { path: 'projects/:id/tasks', component: TaskByProject, canActivate: [loginGuard] },
   { path: '', component: AuthComponent},

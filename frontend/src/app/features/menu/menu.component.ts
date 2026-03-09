@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { NavigationService } from '../../core/services/nagivation.service';
+import { DxButtonModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-menu.component',
-  imports: [],
+  imports: [DxButtonModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css',
 })

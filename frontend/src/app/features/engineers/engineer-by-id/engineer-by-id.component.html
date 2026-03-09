@@ -4,23 +4,27 @@
 <div>Loading Engineer...</div>
 }
 
-@if(!loading()) {
-<table>
-    <thead>
-        <th>Engineer Id</th>
-        <th>Name</th>
-        <th>Role</th>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{engineer()?.engineerId}}</td>
-            <td>{{engineer()?.engineerName}}</td>
-            <td>{{engineer()?.engineerRole}}</td>
-        </tr>
-    </tbody>
-</table>
+@if(engineer()) {
+<dx-data-grid [dataSource]="[engineer()]" [showBorders]="true" [columnAutoWidth]="true" [rowAlternationEnabled]="true"
+    [hoverStateEnabled]="true" [keyExpr]="'engineerId'">
+
+    <dxi-column dataField="engineerId" caption="Id" [width]="80"></dxi-column>
+    <dxi-column dataField="engineerName" caption="Name"></dxi-column>
+    <dxi-column dataField="engineerRole" caption="Role"></dxi-column>
+</dx-data-grid>
 }
 
 @if(!loading && !engineer()) {
 <div>No records found</div>
 }
+
+<div class="buttons">
+    <div>
+        <dx-button stylingMode="contained" text="Back to Engineers" type="default" [width]="120"
+            (onClick)="toEngineers()">
+        </dx-button>
+    </div>
+    <dx-button styling="conatined" text="Delete" type="danger" [width]="120" (onClick)="deleteEngineer()"
+        [disabled]="!engineer()">
+    </dx-button>
+</div>

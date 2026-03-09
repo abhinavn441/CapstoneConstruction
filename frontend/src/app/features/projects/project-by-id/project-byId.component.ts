@@ -5,16 +5,21 @@ import { Project } from '../../../core/models/project.model';
 import { catchError, finalize, of, switchMap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { DxDataGridModule, DxButtonModule } from "devextreme-angular";
+import { NavigationService } from '../../../core/services/nagivation.service';
 
 @Component({
   selector: 'app-project-by-id',
-  imports: [CommonModule],
+  imports: [CommonModule, DxDataGridModule, DxButtonModule],
   templateUrl: './project-byId.component.html',
+  styleUrl: './project-byId.component.css',
 })
 export class ProjecById {
+
   private projectService = inject(ProjectService);
   private route = inject(ActivatedRoute);
-  
+  private navigation = inject(NavigationService);
+
   loading = signal(true);
 
   project = toSignal<Project | null>(
@@ -29,4 +34,16 @@ export class ProjecById {
     ),
     { initialValue: null }
   );
+  toProject() {
+    this.navigation.navigateToProjects();
+  }
+  deleteProject() {
+    this.route.paramMap.pipe(
+      switchMap(params => this.projectService.delete(Number(params.get('id'))))
+    ).subscribe({
+      next: () => {
+        this.navigation.navigateToProjects();
+      }
+    }); 
+  }
 }

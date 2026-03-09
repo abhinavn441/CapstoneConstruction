@@ -5,10 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { finalize } from 'rxjs';
 import { NavigationService } from '../services/nagivation.service';
 import { NotificationService } from '../services/notification.service';
+import { DxTextBoxModule, DxButtonModule } from "devextreme-angular";
 
 @Component({
   selector: 'app-auth.component',
-  imports: [FormsModule],
+  imports: [FormsModule, DxTextBoxModule, DxButtonModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css',
 })

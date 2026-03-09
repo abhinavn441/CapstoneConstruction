@@ -4,32 +4,38 @@
 }
 
 @if(!loading()) {
-<table>
-  <thead>
-    <tr>
-      <th>Task Id</th>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Project Id</th>
-      <th>Engineer Id</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for(task of tasks(); track task.taskItemId) {
-    <tr>
-      <td>{{task.taskItemId}}</td>
-      <td>{{task.taskName}}</td>
-      <td>{{task.status}}</td>
-      <td>{{task.projectId}}</td>
-      <td>{{task.engineerId}}</td>
-    </tr>
-    }
-  </tbody>
-</table>
+<dx-data-grid [dataSource]="tasks()" [showBorders]="true" [columnAutoWidth]="true" [rowAlternationEnabled]="true"
+  (onSelectionChanged)="onSelectionChanged($event)" [hoverStateEnabled]="true" [keyExpr]="'taskItemId'">
+
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]" [showInfo]="true">
+  </dxo-pager>
+
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+  <dxo-export [enabled]="false" [allowExportSelectedData]="true"></dxo-export>
+  <dxo-selection mode="multiple"></dxo-selection>
+
+  <dxi-column dataField="taskItemId" caption="Id" [width]="80"></dxi-column>
+  <dxi-column dataField="taskName" caption="Name"></dxi-column>
+  <dxi-column dataField="status" caption="Status"></dxi-column>
+  <dxi-column dataField="projectId" caption="Project Id"></dxi-column>
+  <dxi-column dataField="engineerId" caption="Engineer Id"></dxi-column>
+</dx-data-grid>
 }
 
-@if(!loading() && tasks()?.length===0) {
+@if(!loading() && tasks().length===0) {
 <div>
   No tasks found.
 </div>
 }
+<div class="list-buttons">
+  <dx-button stylingMode="contained" text="Back" type="normal" [width]="120" (onClick)="back()"></dx-button>
+  <dx-button stylingMode="contained" text="Create Task" type="default" [width]="120"
+    (onClick)="toCreateEngineers()"></dx-button>
+  <dx-button stylingMode="contained" text="Delete" type="danger" [width]="120" (onClick)="deleteSelected()"
+    [disabled]="selectedKeys().length === 0"></dx-button>
+  <dx-button stylingMode="contained" text="Update" type="success" [width]="120" (onClick)="updtaeSelected()" 
+    [disabled]="selectedKeys().length === 0 || selectedKeys().length > 1"></dx-button>
+</div>

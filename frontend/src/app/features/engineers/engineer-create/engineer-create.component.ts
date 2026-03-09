@@ -3,18 +3,19 @@ import { CreateEngineer } from '../../../core/models/createengineer.model';
 import { EngineerService } from '../../../core/services/engineer.service';
 import { finalize } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { NavigationService } from '../../../core/services/nagivation.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DxTextBoxModule, DxButtonModule } from "devextreme-angular";
+import { DxiItemModule } from "devextreme-angular/ui/nested";
 
 @Component({
   selector: 'app-engineer-create',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DxTextBoxModule, DxButtonModule, DxiItemModule],
   templateUrl: './engineer-create.component.html',
   styleUrl: './engineer-create.component.css',
 })
 export class EngineerCreate {
-  @ViewChild('form') form!:NgForm;
   model: CreateEngineer = {
     engineerName: '',
     engineerRole: ''
@@ -28,14 +29,11 @@ export class EngineerCreate {
   ) { }
 
   submit(): void {
-    if(this.submitting()) return;
-    console.log(this.form.dirty)
     this.submitting.set(true);
     this.engineerService.create(this.model).pipe(
       finalize(() => this.submitting.set(false))
     ).subscribe({
       next: () => {
-        this.form.resetForm();
         this.snackbar.open('Engineer created', 'Dismiss', {
           duration: 2000
         });
@@ -43,10 +41,7 @@ export class EngineerCreate {
       }
     });
   }
-
-  canDeactivate() : boolean {
-    if(!this.form?.dirty) return true;
-
-    return confirm('You have unsaved chnages.Leave this page?');
+  back() {
+    this.navigation.navigateToEngineers();
   }
 }

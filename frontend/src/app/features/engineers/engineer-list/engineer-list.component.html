@@ -5,24 +5,35 @@
 }
 
 @if(!loading()) {
-<table>
-    <thead>
-        <th>Engineer Id</th>
-        <th>Name</th>
-        <th>Role</th>
-    </thead>
-    <tbody>
-        @for(engineer of engineers(); track engineer.engineerId) {
-        <tr>
-            <td>{{engineer.engineerId}}</td>
-            <td>{{engineer.engineerName}}</td>
-            <td>{{engineer.engineerRole}}</td>
-        </tr>
-        }
-    </tbody>
-</table>
+<dx-data-grid [dataSource]="engineers()" [showBorders]="true" [columnAutoWidth]="true" [rowAlternationEnabled]="true"
+  (onSelectionChanged)="onSelectionChanged($event)" [hoverStateEnabled]="true" [keyExpr]="'engineerId'">
+
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]" [showInfo]="true">
+  </dxo-pager>
+
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+  <dxo-export [enabled]="false" [allowExportSelectedData]="true"></dxo-export>
+  <dxo-selection mode="multiple"></dxo-selection>
+
+  <dxi-column dataField="engineerId" caption="Id" [width]="80" [allowFiltering]="false"></dxi-column>
+  <dxi-column dataField="engineerName" caption="Name" [allowFiltering]="false"></dxi-column>
+  <dxi-column dataField="engineerRole" caption="Role"></dxi-column>
+</dx-data-grid>
 }
 
-@if(!loading && engineers()?.length===0) {
+@if(!loading() && engineers().length===0) {
 <div>No records found</div>
 }
+
+<div class="list-buttons">
+  <dx-button stylingMode="contained" text="Back" type="normal" [width]="120" (onClick)="back()"></dx-button>
+  <dx-button stylingMode="contained" text="Create Engineer" type="default" [width]="120"
+    (onClick)="toCreateEngineers()"></dx-button>
+  <dx-button stylingMode="contained" text="Delete" type="danger" [width]="120" (onClick)="deleteSelected()"
+    [disabled]="selectedKeys().length === 0"></dx-button>
+  <dx-button stylingMode="contained" text="Update" type="success" [width]="120" (onClick)="updateSelected()"
+    [disabled]="selectedKeys().length === 0 || selectedKeys().length > 1"></dx-button>
+</div>

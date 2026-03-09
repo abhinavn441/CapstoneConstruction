@@ -19,35 +19,36 @@ namespace CapstoneConstruction.Controllers
         [HttpPost("login")]
         public IActionResult Login(LoginDto loginDto)
         {
-            if (loginDto.Username != "admin" && loginDto.Password != "admin@123")
-                return Unauthorized("Invalid credentials");
-            
-            var claims = new[]
+            if (loginDto.Username == "admin" && loginDto.Password == "admin@123")
             {
+                var claims = new[]
+                {
                 new Claim(ClaimTypes.Name, loginDto.Username)
             };
 
-            var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_config["Jwt:Key"]!)
-            );
-            var creds = new SigningCredentials(
-                key, 
-                SecurityAlgorithms.HmacSha256
-             );
+                var key = new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(_config["Jwt:Key"]!)
+                );
+                var creds = new SigningCredentials(
+                    key,
+                    SecurityAlgorithms.HmacSha256
+                 );
 
-            var token = new JwtSecurityToken(
-                issuer: _config["Jwt:Issuer"],
-                audience: _config["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddHours(1),
-                signingCredentials: creds
-            );
-            new JwtSecurityTokenHandler().WriteToken(token);
+                var token = new JwtSecurityToken(
+                    issuer: _config["Jwt:Issuer"],
+                    audience: _config["Jwt:Audience"],
+                    claims: claims,
+                    expires: DateTime.Now.AddHours(1),
+                    signingCredentials: creds
+                );
+                new JwtSecurityTokenHandler().WriteToken(token);
 
-            return Ok(new
-            {
-                token = new JwtSecurityTokenHandler().WriteToken(token)
-            });
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token)
+                });
+            }
+            return Unauthorized("Invalid credentials");
         }
     }
 }

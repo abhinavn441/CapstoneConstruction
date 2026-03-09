@@ -1,8 +1,10 @@
-﻿namespace CapstoneConstruction.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CapstoneConstruction.Dtos
 {
     public record CreateEngineerDto
     (
-        string EngineerName,
-        string EngineerRole
+        [param: Required(AllowEmptyStrings = false)] string EngineerName,
+        [param: Required(AllowEmptyStrings = false)] string EngineerRole
     );
 }

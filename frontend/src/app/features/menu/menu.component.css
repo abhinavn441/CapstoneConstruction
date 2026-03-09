@@ -1,0 +1,11 @@
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.buttons > div {
+  width: 300px;
+  flex-wrap: nowrap;
+  display: flex;
+}

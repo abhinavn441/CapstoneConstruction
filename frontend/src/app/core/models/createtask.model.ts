@@ -3,5 +3,5 @@ export interface CreateTask {
     taskDescription: string;
     status: number;
     projectId: number;
-    engineerId?:number;
+    engineerId:number | null;
 }

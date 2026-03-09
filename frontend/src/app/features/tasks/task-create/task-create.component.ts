@@ -6,10 +6,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavigationService } from '../../../core/services/nagivation.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DxTextBoxModule, DxNumberBoxComponent, DxSelectBoxModule, DxButtonModule } from "devextreme-angular";
 
 @Component({
   selector: 'app-task-create',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DxTextBoxModule, DxNumberBoxComponent, DxSelectBoxModule, DxButtonModule],
   templateUrl: './task-create.component.html',
   styleUrl: './task-create.component.css',
 })
@@ -28,7 +29,13 @@ export class TaskCreate {
     private navigation: NavigationService,
     private snackbar: MatSnackBar
   ) {}
-
+statusOptions = [
+    {id: 0, name: 'Planned'},
+    {id: 1, name: 'In Progress'},
+    {id: 2, name: 'On Hold'},
+    {id: 3, name: 'Completed'},
+    {id: 4, name: 'Cancelled'}
+]
   submit(): void {
     this.submitting.set(true);
 
@@ -44,5 +51,12 @@ export class TaskCreate {
       }
     });
     console.log(this.model);
+  }
+  back() {
+    this.navigation.navigateToTasks();
+  }
+  onEngineerIdChanged(e: any) {
+    const value = e.value;
+    this.model.engineerId = value === null ? null : value;
   }
 }

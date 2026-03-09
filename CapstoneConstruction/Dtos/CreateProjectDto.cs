@@ -1,9 +1,11 @@
-﻿namespace CapstoneConstruction.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CapstoneConstruction.Dtos
 {
     public record CreateProjectDto
     (
-        string ProjectName,
-        string ProjectDescription,
+        [param: Required(AllowEmptyStrings = false)] string ProjectName,
+        [param: Required(AllowEmptyStrings = false)] string ProjectDescription,
         DateTime StartDate,
         Status Status,
         int ManagerId,

@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+
+.dx-fieldset:first-child > h4:first-child {
+  margin-top: 0;
+}
+
+.dx-field > .dx-field-label {
+  width: 20%;
+}
+
+.dx-field > .dx-field-value {
+  width: 80%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.buttons > div {
+  width: 300px;
+  flex-wrap: nowrap;
+  display: flex;
+}
+
+.list-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .list-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .list-buttons > div {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
